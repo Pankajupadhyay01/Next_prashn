@@ -1,10 +1,9 @@
 import dbConnect from "@/lib/dbConnect";
 import userModel from "@/modal/User";
-import { NextApiRequest } from "next";
 import crypto from 'crypto'
 import { sendForgetPass } from "@/lib/resend";
 export async function POST(req: Request) {
-    dbConnect()
+    await dbConnect()
     try {
         const { email } = await req.json();
 
@@ -32,7 +31,7 @@ export async function POST(req: Request) {
 
         const protocol = req.headers.get('x-forwarded-proto') ?? 'http';
         const host = req.headers.get('host');
-        const reseturl = `${protocol}://${host}/api/v1/pass/reset/${token}`
+        const reseturl = `${protocol}://${host}/password-reset/${token}`
 
         // seting user Token to 
         user.resetToken = token
@@ -50,17 +49,16 @@ export async function POST(req: Request) {
                     status: 400,
                 }
             )
-        } else {
-            return Response.json(
-                {
-                    sucess: true,
-                    message: "Email Send to registered mail id"
-                },
-                {
-                    status: 200,
-                }
-            )
         }
+        return Response.json(
+            {
+                sucess: true,
+                message: "Email Send to registered mail id"
+            },
+            {
+                status: 200,
+            }
+        )
     } catch (err: any) {
         console.log(err)
         return Response.json(

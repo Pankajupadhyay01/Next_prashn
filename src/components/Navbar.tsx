@@ -17,7 +17,7 @@ const Navbar = () => {
     const { data: session, status } = useSession()
     return (
         <>
-            <nav className='p-4 bg-gray-200  flex justify-between items-center'>
+            <nav className='p-4 flex justify-between items-center shadow-2xl'>
                 <h1 className='text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-green-500'>
                     Prashn
                 </h1>

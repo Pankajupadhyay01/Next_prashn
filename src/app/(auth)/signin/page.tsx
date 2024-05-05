@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input"
 import { signIn } from "next-auth/react"
 const page = () => {
 
-    const [isSubmitting, setisSubmitting] = useState(false)
+    const [isSubmitting, setisSubmitting] = useState<Boolean>(false)
     const router = useRouter()
     const { toast } = useToast()
 

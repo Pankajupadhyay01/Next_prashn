@@ -2,11 +2,10 @@ import dbConnect from "@/lib/dbConnect";
 import userModel from "@/modal/User";
 
 export async function PUT(req: Request) {
-    dbConnect()
+    await dbConnect()
     try {
         const { token, password } = await req.json()
         const user = await userModel.findOne({ token, resetTokenExpire: { $gt: Date.now() } })
-        console.log(user);
 
         if (!user) {
             return Response.json(
