@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-const page = () => {
+const Page = () => {
 
     const [isSubmitting, setisSubmitting] = useState(false)
     const router = useRouter()
@@ -141,4 +141,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

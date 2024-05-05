@@ -14,7 +14,7 @@ import { toast } from '@/components/ui/use-toast'
 import axios from 'axios'
 
 
-const page = () => {
+const Page = () => {
   const id = useParams().id
   const [isLoading, setisLoading] = useState(false)
   const [value, setValue] = useState("")
@@ -90,4 +90,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

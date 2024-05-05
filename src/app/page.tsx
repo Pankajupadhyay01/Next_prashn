@@ -3,10 +3,9 @@ import QuestionCard from '@/components/QuestionCard'
 import { BackgroundGradientAnimation } from '@/components/ui/background-gradient-animation'
 import { toast } from '@/components/ui/use-toast'
 import axios from 'axios'
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
-const page = () => {
+const Page = () => {
   interface question {
     body: string,
     category: string,
@@ -49,4 +48,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
