@@ -3,8 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { signupValidation } from "@/validationSchema/signupSchema"
+import { useRouter } from "next/navigation" 
 import axios from "axios"
 import { useToast } from "@/components/ui/use-toast"
 import { Button } from "@/components/ui/button"
@@ -40,7 +39,7 @@ const Page = () => {
         },
     })
 
-    const onSubmit = async (values: z.infer<typeof signupValidation>) => {
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
         setisSubmitting(true)
         try {
             const data = await axios.post('/api/signup', values)
