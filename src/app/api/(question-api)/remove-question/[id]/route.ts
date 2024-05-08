@@ -11,8 +11,6 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     const session = await getServerSession(Option)
     const user: user = session?.user
     try {
-        // console.log(questionId);
-        // console.log(session?.user._id);
         const question = await questionModel.findById(questionId)
 
         if (!user) {

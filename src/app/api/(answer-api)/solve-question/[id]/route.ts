@@ -8,7 +8,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     await dbConnect();
     const session = await getServerSession(Option)
     const questionId = params.id;
-    const user = session?.user._id 
+    const user = session?.user._id
 
     try {
         const { content } = await req.json()
@@ -30,12 +30,11 @@ export async function POST(req: Request, { params }: { params: { id: string } })
 
         const answer = await answerModel.create({ user, questionId, content })
         isQuestionExist.answers.push(answer._id)
-        await isQuestionExist.save() 
+        await isQuestionExist.save()
 
         return Response.json({
             sucess: true,
             message: "Answer added",
-            // answer
         }, { status: 200 })
 
     } catch (err: any) {
