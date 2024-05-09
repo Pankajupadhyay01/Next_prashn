@@ -29,7 +29,7 @@ const Page = () => {
       })
     })
 
-  }, []) 
+  }, [])
 
   return (
     <div className='flex z-50 flex-col my-4 gap-4 w-full items-center'>
