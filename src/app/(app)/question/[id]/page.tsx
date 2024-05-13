@@ -8,7 +8,7 @@ import { toast } from "@/components/ui/use-toast"
 import { questions } from "@/type/question-answer"
 import AnswerCard from "@/components/AnswerCard"
 
-const page = () => {
+const Page = () => {
     const params = useParams<{ id: string }>();
     const id = params.id 
 
@@ -52,4 +52,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
