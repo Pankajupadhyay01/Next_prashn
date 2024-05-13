@@ -1,5 +1,5 @@
 'use client'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import {
   InputOTP,
   InputOTPGroup,
@@ -13,6 +13,7 @@ import axios from 'axios'
 
 
 const Page = () => {
+  const router = useRouter()
   const id = useParams().id
   const [isLoading, setisLoading] = useState<Boolean>(false)
   const [value, setValue] = useState<string>()
@@ -40,6 +41,7 @@ const Page = () => {
           variant: "sucess"
         })
         setisLoading(false)
+        router.replace(`/signin`)
       }
       catch (error: any) {
         console.log(error);

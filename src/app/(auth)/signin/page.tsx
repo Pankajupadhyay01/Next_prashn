@@ -117,6 +117,7 @@ const Page = () => {
                         </Button>
                     </form>
                     <Link className="text-blue-600 w-full flex items-end justify-end" href={"/"}>Forget Password ?</Link>
+                    <Link className="text-blue-600 w-full flex items-end justify-end" href={"/signup"}>Sign Up</Link>
                 </Form>
             </div>
         </div>

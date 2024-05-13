@@ -9,7 +9,9 @@ import { questions } from "@/type/question-answer"
 import AnswerCard from "@/components/AnswerCard"
 
 const page = () => {
-    const id = useParams().id
+    const params = useParams<{ id: string }>();
+    const id = params.id 
+
     const [isLoading, setisLoading] = useState<Boolean>(true)
     const [data, setdata] = useState<questions | null>(null)
     // fetching question
