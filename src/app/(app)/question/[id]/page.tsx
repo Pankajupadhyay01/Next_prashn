@@ -5,20 +5,20 @@ import QuestionForm from "@/components/QuestionForm"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { toast } from "@/components/ui/use-toast"
-import QuestionAnswer from "@/components/QuestionAnswer"
-import { question } from "@/type/question-answer"
+import { questions } from "@/type/question-answer"
+import AnswerCard from "@/components/AnswerCard"
 
 const page = () => {
     const id = useParams().id
     const [isLoading, setisLoading] = useState<Boolean>(true)
-    const [data, setdata] = useState<question | null>(null)
+    const [data, setdata] = useState<questions | null>(null)
     // fetching question
     const fetchQuestion = async () => {
-        axios.get(`http://localhost:3000/api/get-question?id=${id}`)
+        axios.get(`/api/get-question?id=${id}`)
             .then((res) => {
-                setisLoading(false)
                 const data = res.data?.data[0]
                 setdata(data)
+                setisLoading(false)
             }).catch((err) => {
                 setisLoading(false)
                 toast({
@@ -35,15 +35,15 @@ const page = () => {
 
     return (
         <div className="flex md:flex-row flex-col justify-between w-[95%] m-auto h-full">
-            <div className="flex flex-col items-center w-full md:w-[68%] mt-5 ">
+            <div className="md:w-[68%] w-full ">
                 {
                     isLoading ?
-                        <p>Loading...</p> : <QuestionAnswer {...data} />
+                        <p>Loading...</p> : <AnswerCard {...data} />
                 }
             </div>
 
             {/* ask question form question  */}
-            <div className="w-full md:w-[30%] ">
+            <div className="w-full md:w-[30%]">
                 <QuestionForm />
             </div>
         </div>

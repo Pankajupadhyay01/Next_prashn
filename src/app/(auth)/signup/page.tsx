@@ -53,9 +53,7 @@ const Page = () => {
             router.replace(`/verify/${id}`)
             setisSubmitting(false)
         } catch (error: any) {
-
-            console.log(error);
-
+  
             const errMsg = error.response.data.message
             toast({
                 title: "Sign Up Failed",

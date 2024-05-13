@@ -7,17 +7,15 @@ import {
 } from "@/components/ui/input-otp"
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { Eclipse, Ellipsis, Loader } from 'lucide-react'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { Ellipsis } from 'lucide-react'
 import { toast } from '@/components/ui/use-toast'
 import axios from 'axios'
 
 
 const Page = () => {
   const id = useParams().id
-  const [isLoading, setisLoading] = useState(false)
-  const [value, setValue] = useState("")
+  const [isLoading, setisLoading] = useState<Boolean>(false)
+  const [value, setValue] = useState<string>()
 
 
   // handling submit

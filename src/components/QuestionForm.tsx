@@ -8,8 +8,11 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from 'zod'
 import { Textarea } from "./ui/textarea"
+import axios from "axios"
+import { toast } from "./ui/use-toast"
+import { useRouter } from "next/navigation"
 const QuestionForm = () => {
-
+    const router = useRouter()
     const formSchema = z.object({
         title: z.string().min(10, "Title must be at least 10 characters"),
         body: z.string().min(10, "Describe Question minimum in 10 characters"),
@@ -25,9 +28,23 @@ const QuestionForm = () => {
         },
     })
 
-    const onSubmit = () => {
-        console.log("ok");
-
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        try {
+            const data = await axios.post("/api/ask-question", values)
+            toast({
+                title: "Success",
+                description: data.data.message,
+                variant: "sucess",
+            })
+            router.replace(`/`)
+        } catch (error: any) {
+            const errMsg = error.response.data.message
+            toast({
+                title: "Error While Posting Your Question",
+                description: errMsg,
+                variant: "destructive"
+            })
+        }
     }
     return (
         <Card className="w-full my-5 border-2 border-black">

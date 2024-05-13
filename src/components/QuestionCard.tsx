@@ -1,11 +1,8 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
-
-const QuestionCard = ({ ...obj }) => {
+import React from "react"
+const QuestionCard = ({ ...data }) => {
     return (
         <>
-            <Link href={`/question/${obj._id}`} className='bg-gray-800 text-white max-w-screen h-auto w-[80%] p-4 flex flex-col rounded-lg z-50'>
+            <div className='bg-gray-800 text-white max-w-screen h-auto w-full p-4 flex justify-center flex-col rounded-lg z-50'>
 
                 {/* question title and user name */}
                 <div className='flex flex-col gap-4'>
@@ -13,12 +10,12 @@ const QuestionCard = ({ ...obj }) => {
                     <div>
 
                         <h1 className=' capitalize font-bold text-xl'>
-                            {obj.title}
+                            {data.title}
                         </h1>
 
                         {/* description of question */}
                         <h3 className='text-lg'>
-                            {obj.body}
+                            {data.body}
                         </h3>
 
                     </div>
@@ -29,18 +26,18 @@ const QuestionCard = ({ ...obj }) => {
                         <p className=' text-cyan-400 capitalize'>
                             Asked By :-
                             <span>
-                                {obj.userId.username}
+                                {data.userId?.username ? data.userId.username : data.askedBy}
                             </span>
                         </p>
 
                         <div className='bg-gray-200 p-3 rounded-lg text-black font-semibold'>
-                            {obj.category}
+                            {data.category ? data.category : data.createdAt}
                         </div>
                     </div>
 
                 </div>
 
-            </Link>
+            </div>
         </>
     )
 }

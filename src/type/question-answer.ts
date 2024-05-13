@@ -1,4 +1,4 @@
-export interface question {
+export interface questions {
     title: string;
     askedBy: string;
     body: string;

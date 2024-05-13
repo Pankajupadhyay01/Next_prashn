@@ -84,11 +84,18 @@ export async function GET(req: Request) {
                     },
                     answers: {
                         $push: {
-                            id: "$answers._id",
-                            user: "$answerBy.username",
-                            answer: "$answers.content",
-                            upvote: "$answers.upvote",
-                            downvote: "$answers.downvote"
+                            $cond: {
+                                if: { $eq: [{ $ifNull: ['$answers', []] },[]] },
+                                then: '$$REMOVE',
+                                else: {
+
+                                    id: "$answers._id",
+                                    user: "$answerBy.username",
+                                    answer: "$answers.content",
+                                    upvote: "$answers.upvote",
+                                    downvote: "$answers.downvote"
+                                }
+                            }
                         }
                     }
                 }

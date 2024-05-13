@@ -2,10 +2,12 @@
 import QuestionCard from '@/components/QuestionCard'
 import { toast } from '@/components/ui/use-toast'
 import axios from 'axios'
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 const Page = () => {
   interface question {
+    _id: string,
     body: string,
     category: string,
     createdAt: Date,
@@ -16,7 +18,7 @@ const Page = () => {
   const [question, setquestion] = useState<question[]>([])
   const [isLoading, setisLoading] = useState<Boolean>(true)
   useEffect(() => {
-    axios.get('http://localhost:3000/api/all-question?page=1&limit=10').then((res) => {
+    axios.get('/api/all-question?page=1&limit=10').then((res) => {
       setisLoading(false)
       setquestion(res.data.slicedData)
     }).catch(e => {
@@ -34,8 +36,11 @@ const Page = () => {
   return (
     <div className='flex z-50 flex-col my-4 gap-4 w-full items-center'>
       {
-        isLoading ? "Loading..." : question.map((obj, i) => (
-          <QuestionCard key={i} {...obj} />
+        isLoading ? "Loading..." : question.map((data, i) => (
+          <Link key={i} href={`/question/${data._id}`} className='max-w-screen w-[80%] flex m-auto justify-center items-center'>
+            <QuestionCard {...data} />
+          </Link>
+
         ))
       }
     </div>

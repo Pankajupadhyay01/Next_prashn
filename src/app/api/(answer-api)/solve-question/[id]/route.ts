@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 
 export async function POST(req: Request, { params }: { params: { id: string } }) {
     await dbConnect();
+    
     const session = await getServerSession(Option)
     const questionId = params.id;
     const user = session?.user._id

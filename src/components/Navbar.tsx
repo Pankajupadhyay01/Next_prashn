@@ -1,5 +1,6 @@
 'use client'
-import { LogIn, LogOut, Settings, User } from "lucide-react"
+import { LogIn, LogOut, Settings, User, MessageCircleQuestion } from "lucide-react"
+
 import { signOut, useSession } from 'next-auth/react'
 import {
     DropdownMenu,
@@ -49,9 +50,17 @@ const Navbar = () => {
 
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem>
+                                        <MessageCircleQuestion className="mr-2 h-4 w-4" />
+                                        <span>Ask Question</span>
+                                    </DropdownMenuItem>
+
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem>
                                         <LogOut className="mr-2 h-4 w-4" />
                                         <button onClick={() => signOut()}>Log out</button>
                                     </DropdownMenuItem>
+
+
                                 </DropdownMenuContent>
                             </DropdownMenu>
                             :
