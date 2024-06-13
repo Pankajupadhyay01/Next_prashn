@@ -33,7 +33,7 @@ const answerSchema: Schema<answer> = new Schema({
     createdAt: {
         type: Date,
         required: true,
-        default: Date.now()
+        default: Date.now
     }
 })
 

@@ -10,7 +10,7 @@ import AnswerCard from "@/components/AnswerCard"
 
 const Page = () => {
     const params = useParams<{ id: string }>();
-    const id = params.id 
+    const id = params.id
 
     const [isLoading, setisLoading] = useState<Boolean>(true)
     const [data, setdata] = useState<questions | null>(null)
@@ -19,7 +19,7 @@ const Page = () => {
         axios.get(`/api/get-question?id=${id}`)
             .then((res) => {
                 const data = res.data?.data[0]
-                setdata(data)
+                setdata(data) 
                 setisLoading(false)
             }).catch((err) => {
                 setisLoading(false)

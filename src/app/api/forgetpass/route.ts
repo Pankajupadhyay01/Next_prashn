@@ -6,15 +6,15 @@ export async function POST(req: Request) {
     await dbConnect()
     try {
         const { email } = await req.json();
-
         const user = await userModel.findOne({ email })
+
         if (!user) {
 
             return Response.json(
                 {
                     sucess: false,
                     message: "Please Register first"
-                }, { status: 400, })
+                }, { status: 404 })
 
         }
 
@@ -34,8 +34,10 @@ export async function POST(req: Request) {
         const reseturl = `${protocol}://${host}/password-reset/${token}`
 
         // seting user Token to 
+
         user.resetToken = token
         user.resetTokenExpire = new Date(Date.now() + 10 * 60 * 1000)
+
         user.save()
 
         const resForget = await sendForgetPass(email, user.username, reseturl)

@@ -1,5 +1,9 @@
 import React from "react"
 const QuestionCard = ({ ...data }) => {
+    if (data.createdAt) {
+        const date = new Date(data.createdAt).toString().split(" ")
+        data.createdAt = date[1] + " " + date[2] + " " + date[3]
+    }
     return (
         <>
             <div className='bg-gray-800 text-white max-w-screen h-auto w-full p-4 flex justify-center flex-col rounded-lg z-50'>
@@ -31,7 +35,7 @@ const QuestionCard = ({ ...data }) => {
                         </p>
 
                         <div className='bg-gray-200 p-3 rounded-lg text-black font-semibold'>
-                            {data.category ? data.category : data.createdAt}
+                            {data.category ? data.category : data.createdAt.split("T")}
                         </div>
                     </div>
 

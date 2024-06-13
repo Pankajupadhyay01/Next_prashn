@@ -10,7 +10,6 @@ export const Option: NextAuthOptions = {
             name: "credentials",
             credentials: {
                 email: { label: "email", type: "text" },
-
                 password: { label: "password", type: "password" }
             },
             async authorize(credentials: any, req): Promise<any> {
@@ -65,12 +64,12 @@ export const Option: NextAuthOptions = {
         }
 
     },
+    session: {
+        strategy: "jwt",
+    },
+    secret: process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: '/signin',
     },
-    session: {
-        strategy: "jwt"
-    },
-    secret: process.env.JWT_SECRET
 
 }

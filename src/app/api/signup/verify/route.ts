@@ -18,7 +18,7 @@ export async function POST(req: Request) {
                 }, { status: 400 })
         }
         else {
-            const isCodeNotExpire = new Date(user.verifyExpire) > new Date() 
+            const isCodeNotExpire = new Date(user.verifyExpire) > new Date()
 
             if (otp == user.verifyCode && isCodeNotExpire) {
 

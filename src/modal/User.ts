@@ -37,7 +37,7 @@ const userSchema: Schema<user> = new Schema({
     },
     verifyExpire: {
         type: Date,
-        default: Date.now()
+        default: Date.now
     },
     message: [
         {
@@ -46,11 +46,12 @@ const userSchema: Schema<user> = new Schema({
         }
     ],
     resetToken: {
-        type: String,
-        default: ""
+        type: String
     },
-    resetTokenExpire: Date,
-
+    resetTokenExpire: {
+        type: Date,
+        default: Date.now
+    },
 })
 
 userSchema.pre("save", async function (next) {

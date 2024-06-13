@@ -37,10 +37,12 @@ const Navbar = () => {
                                     <DropdownMenuLabel>Welcome Back ! {session.user.username}</DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuGroup>
-                                        <DropdownMenuItem>
-                                            <User className="mr-2 h-4 w-4" />
-                                            <span>Dashboard</span>
-                                        </DropdownMenuItem>
+                                        <Link href={"/dashboard"}>
+                                            <DropdownMenuItem>
+                                                <User className="mr-2 h-4 w-4" />
+                                                <span>Dashboard</span>
+                                            </DropdownMenuItem>
+                                        </Link>
                                         <DropdownMenuItem>
                                             <Settings className="mr-2 h-4 w-4" />
                                             <span>Profile</span>
@@ -49,16 +51,20 @@ const Navbar = () => {
                                     <DropdownMenuSeparator />
 
                                     <DropdownMenuSeparator />
-                                    <DropdownMenuItem>
-                                        <MessageCircleQuestion className="mr-2 h-4 w-4" />
-                                        <span>Ask Question</span>
-                                    </DropdownMenuItem>
+                                    <Link href={"/ask-question"}>
+                                        <DropdownMenuItem>
+                                            <MessageCircleQuestion className="mr-2 h-4 w-4" />
+                                            Ask Question
+                                        </DropdownMenuItem>
+                                    </Link>
 
                                     <DropdownMenuSeparator />
-                                    <DropdownMenuItem>
-                                        <LogOut className="mr-2 h-4 w-4" />
-                                        <button onClick={() => signOut()}>Log out</button>
-                                    </DropdownMenuItem>
+                                    <button onClick={() => signOut()}>
+                                        <DropdownMenuItem>
+                                            <LogOut className="mr-2 h-4 w-4" />
+                                            Log out
+                                        </DropdownMenuItem>
+                                    </button>
 
 
                                 </DropdownMenuContent>

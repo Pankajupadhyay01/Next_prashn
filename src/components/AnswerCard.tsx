@@ -3,7 +3,7 @@ import QuestionCard from './QuestionCard'
 import { Answer } from '@/type/question-answer'
 import { ChevronsUp, ChevronsDown } from 'lucide-react';
 import AnswerForm from './AnswerForm';
-const AnswerCard = ({ ...data }) => { 
+const AnswerCard = ({ ...data }) => {
     return (
         <div className='w-full'>
 
@@ -48,14 +48,6 @@ const AnswerCard = ({ ...data }) => {
                                     </div>
                                     <div className='font-bold'>
                                         upvote ({obj.upvote})
-                                    </div>
-                                </div>
-                                <div className='flex gap-3 justify-center items-center'>
-                                    <div className='bg-blue-900 p-2 rounded-full text-white'>
-                                        <ChevronsDown />
-                                    </div>
-                                    <div className='font-bold'>
-                                        downvote ({obj.downvote})
                                     </div>
                                 </div>
                             </div>

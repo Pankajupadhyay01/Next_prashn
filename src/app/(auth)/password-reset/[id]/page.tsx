@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
 import { Button } from "@/components/ui/button"
 import {
@@ -16,49 +16,46 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { signIn } from "next-auth/react"
+import axios from "axios"
 const Page = () => {
 
     const [isSubmitting, setisSubmitting] = useState(false)
     const router = useRouter()
     const { toast } = useToast()
+    const token = useParams().id
 
     const formSchema = z.object({
-        email: z.string().email({ message: "Please Enter Valid Email" }),
-        password: z.string().min(8, "Password must be atleast of 8 character ")
+        password: z.string().min(8, "Password must be atleast of 8 character"),
     })
 
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            email: '',
-            password: '',
+            password: ''
         },
     })
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         setisSubmitting(true)
+        try {
+            const password = values.password
 
-        const data = await signIn('credentials', {
-            redirect: false,
-            email: values.email,
-            password: values.password
-        })
+            await axios.put('/api/resetpass', { token, password })
 
-        if (data?.error) {
-            setisSubmitting(false)
             toast({
-                title: "Login Failed Error ",
-                description: data.error,
-                color: "error",
-                variant: "destructive"
-            })
-        }
-        else {
-            router.replace("/")
-            toast({
-                title: "Login Sucessfull",
+                title: "Success",
+                description: "Password Reset Sucessfully",
                 variant: "sucess",
+            })
+            router.replace(`/signin`)
+            setisSubmitting(false)
+        } catch (error) {
+            console.log(error);
+            
+            toast({
+                title: "Error",
+                description: "Something Went Wrong",
+                variant: "destructive"
             })
             setisSubmitting(false)
         }
@@ -68,31 +65,11 @@ const Page = () => {
     return (
         <div className="flex flex-col min-h-screen justify-center items-center w-full bg-gray-200 gap-3">
 
-            <h1 className="text-3xl font-bold text-black">
-                Sign In
-            </h1>
+
             <div className="lg:w-[40%] sm:w-[60%] w-[90%] p-6 rounded-xl bg-gradient-to-tr from-gray-300 to-slate-200 ">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 flex justify-center flex-col">
 
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Email</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="Enter Your Email" {...field}
-                                            onChange={(e) => {
-                                                field.onChange(e)
-
-                                            }}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
                         <FormField
                             control={form.control}
                             name="password"
@@ -100,9 +77,10 @@ const Page = () => {
                                 <FormItem>
                                     <FormLabel>Password</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Enter Your Password " {...field}
+                                        <Input placeholder="Enter Your Password" {...field}
                                             onChange={(e) => {
                                                 field.onChange(e)
+
                                             }}
                                         />
                                     </FormControl>
@@ -112,12 +90,11 @@ const Page = () => {
                         />
                         <Button type="submit" disabled={isSubmitting} className="flex  justify-center items-center m-auto ">
                             {
-                                isSubmitting ? "Loading.." : "Submit"
+                                isSubmitting ? "Loading.." : "Reset Password"
                             }
                         </Button>
                     </form>
-                    <Link className="text-blue-600 w-full flex items-end justify-end" href={"/forget-password"}>Forget Password ?</Link>
-                    <Link className="text-blue-600 w-full flex items-end justify-end" href={"/signup"}>Sign Up</Link>
+                    <Link className="text-blue-600 w-full flex items-end justify-end" href={"/signin"}>Sign In</Link>
                 </Form>
             </div>
         </div>

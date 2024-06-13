@@ -17,6 +17,8 @@ const Page = () => {
 
   const [question, setquestion] = useState<question[]>([])
   const [isLoading, setisLoading] = useState<Boolean>(true)
+
+  
   useEffect(() => {
     axios.get('/api/all-question?page=1&limit=10').then((res) => {
       setisLoading(false)
@@ -35,13 +37,18 @@ const Page = () => {
 
   return (
     <div className='flex z-50 flex-col my-4 gap-4 w-full items-center'>
-      {
-        isLoading ? "Loading..." : question.map((data, i) => (
-          <Link key={i} href={`/question/${data._id}`} className='max-w-screen w-[80%] flex m-auto justify-center items-center'>
-            <QuestionCard {...data} />
-          </Link>
 
-        ))
+
+      {
+        isLoading ? (<p>Loading...</p>) :
+
+          (
+            question.length === 0 ? "No Question Found" : question.map((data, i) => (
+              <Link key={i} href={`/question/${data._id}`} className='max-w-screen w-[80%] flex m-auto justify-center items-center'>
+                <QuestionCard {...data} />
+              </Link>
+            ))
+          )
       }
     </div>
   )
