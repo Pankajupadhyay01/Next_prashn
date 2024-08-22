@@ -7,8 +7,7 @@ export async function PUT(req: Request) {
         const { token, password } = await req.json()
         console.log(token);
 
-        const user = await userModel.findOne({ resetToken: token, resetpasstokenexpire: { $gt: Date.now() } })
-        console.log(user);
+        const user = await userModel.findOne({ resetToken: token, resetTokenExpire: { $gt: Date.now() } })
 
         if (!user) {
             return Response.json(

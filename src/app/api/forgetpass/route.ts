@@ -33,32 +33,31 @@ export async function POST(req: Request) {
         const host = req.headers.get('host');
         const reseturl = `${protocol}://${host}/password-reset/${token}`
 
-        const date = new Date(Date.now()) 
+        const date = new Date(Date.now())
 
         // seting user Token to 
-
-        user.resetToken = token
-        user.resetTokenExpire = date
-
         const expireDate = new Date(Date.now() + 10 * 60 * 1000)
 
+        user.resetToken = token
+        user.resetTokenExpire = expireDate
+
+
         const d = new Date(Date.now() + 3600000)
-        console.log(d);
 
         user.save()
 
-        // const resForget = await sendForgetPass(email, user.username, reseturl)
-        // if (!resForget.sucess) {
-        //     return Response.json(
-        //         {
-        //             sucess: false,
-        //             message: resForget.message
-        //         },
-        //         {
-        //             status: 400,
-        //         }
-        //     )
-        // }
+        const resForget = await sendForgetPass(email, user.username, reseturl)
+        if (!resForget.sucess) {
+            return Response.json(
+                {
+                    sucess: false,
+                    message: resForget.message
+                },
+                {
+                    status: 400,
+                }
+            )
+        }
         return Response.json(
             {
                 sucess: true,
