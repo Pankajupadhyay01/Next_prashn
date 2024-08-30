@@ -26,7 +26,7 @@ import { toast } from "@/components/ui/use-toast";
 import { question } from "@/modal/Question";
 import { useRouter } from "next/navigation"
 
-const page = () => {
+const Page = () => {
     const router = useRouter()
     const { data: session, status } = useSession()
     const [question, setquestion] = useState<question[]>([])
@@ -130,4 +130,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
