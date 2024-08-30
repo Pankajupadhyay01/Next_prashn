@@ -33,7 +33,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 
         return Response.json({
             sucess: true,
-            msg: "Question Asked Sucessfully",
+            msg: "Question Deleted Sucessfully",
         }, { status: 200 })
 
     } catch (error: any) {

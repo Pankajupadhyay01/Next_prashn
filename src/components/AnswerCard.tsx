@@ -41,7 +41,7 @@ const AnswerCard = ({ ...data }) => {
                                 {obj.answer}
                             </div>
 
-                            <div className='border-2 boder-gray-800 px-5 py-3 rounded-lg flex gap-10'>
+                            {/* <div className='border-2 boder-gray-800 px-5 py-3 rounded-lg flex gap-10'>
                                 <div className='flex gap-3 justify-center items-center'>
                                     <div className='bg-blue-900 p-2 rounded-full text-white'>
                                         <ChevronsUp />
@@ -50,7 +50,7 @@ const AnswerCard = ({ ...data }) => {
                                         upvote ({obj.upvote})
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
 
                         </div>
                     ))

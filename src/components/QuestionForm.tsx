@@ -78,7 +78,7 @@ const QuestionForm = () => {
                             name="body"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel>Describe Your Question</FormLabel>
                                     <FormControl>
                                         <Textarea
                                             placeholder="Describe Your Question"
@@ -109,7 +109,7 @@ const QuestionForm = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button>Deploy</Button>
+                        <Button>Ask</Button>
                     </form>
                 </Form>
             </CardContent>
